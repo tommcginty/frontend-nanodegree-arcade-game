@@ -3,6 +3,12 @@ const playerStart_x = 200,
       collision = 50;
 let score = 0;
 
+// Generates a speed value between 50 & 150;
+function generateSpeed(){
+  let speed = Math.floor(Math.random() * 100) + 50;
+  return speed;
+}
+
 // parent class for player & enemies
 class Character {
   constructor (x, y, sprite) {
@@ -23,12 +29,16 @@ class Enemy extends Character {
   // a helper we've provided to easily load images
   constructor(x, y, sprite = 'images/enemy-bug.png') {
   super(x, y, sprite);
-  this.speed = 50;
+  this.speed = generateSpeed();
   }
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
   update (dt) {
-    this.x += speed * dt;
+    this.x += this.speed * dt;
+    if (this.x > 505) {
+      this.x = -202;
+      this.speed = generateSpeed();
+    }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -42,15 +52,43 @@ class Player extends Character {
     update(){
 
     }
-    handleInput(){
+    handleInput(evt){
+      switch (evt) {
+        case 'left':
+          if (this.x > 0)
+            this.x -= 100;
+          break;
 
+        case 'up':
+          if (this.y > 0)
+            this.y -= 85;
+          break;
+
+        case 'right':
+          if (this.x < 400)
+          this.x += 100;
+          break;
+
+        case 'down':
+          if (this.y < 400)
+            this.y += 85;
+          break;
+      }
     }
 }
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = [];
+const bug1 = new Enemy (-100, 60),
+      bug2 = new Enemy (-200, 145),
+      bug3 = new Enemy (-300, 230);
+      bug4 = new Enemy (-400, 60),
+      bug5 = new Enemy (-500, 145),
+      bug6 = new Enemy (-600, 230);
+const allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
+
+
 // Place the player object in a variable called player
 const player = new Player (playerStart_x, playerStart_y);
 
