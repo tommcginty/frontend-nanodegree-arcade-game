@@ -1,12 +1,23 @@
 const playerStart_x = 200,
       playerStart_y = 400,
-      collision = 50;
+      collisionArea = 60;
 let score = 0;
 
 // Generates a speed value between 50 & 150;
 function generateSpeed(){
   let speed = Math.floor(Math.random() * 100) + 50;
   return speed;
+}
+
+function checkCollisions(){
+  for (const item in allEnemies){
+    if( player.x - allEnemies[item].x < collisionArea &&
+        player.y - allEnemies[item].y < collisionArea &&
+        allEnemies[item].x - player.x < collisionArea &&
+        allEnemies[item].y - player.x < collisionArea ||
+        player.y < 1 )
+        return true;
+      }
 }
 
 // parent class for player & enemies
@@ -49,8 +60,18 @@ class Player extends Character {
     constructor (x, y, sprite = 'images/char-boy.png') {
       super(x, y, sprite);
     }
+    resetPlayer(){
+      this.x = playerStart_x;
+      this.y = playerStart_y;
+    }
     update(){
+      if(checkCollisions())
+        this.resetPlayer();
 
+      if (this.y < 0){
+        alert('You Win');
+        this.resetPlayer();
+      }
     }
     handleInput(evt){
       switch (evt) {
@@ -73,12 +94,17 @@ class Player extends Character {
           if (this.y < 400)
             this.y += 85;
           break;
+
+      update();
       }
     }
 }
 
 
 // Now instantiate your objects.
+// Place the player object in a variable called player
+const player = new Player (playerStart_x, playerStart_y);
+
 // Place all enemy objects in an array called allEnemies
 const bug1 = new Enemy (-100, 60),
       bug2 = new Enemy (-200, 145),
@@ -86,11 +112,10 @@ const bug1 = new Enemy (-100, 60),
       bug4 = new Enemy (-400, 60),
       bug5 = new Enemy (-500, 145),
       bug6 = new Enemy (-600, 230);
-const allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
+const allEnemies = [bug1, bug2, bug3];
 
 
-// Place the player object in a variable called player
-const player = new Player (playerStart_x, playerStart_y);
+
 
 
 // This listens for key presses and sends the keys to your
