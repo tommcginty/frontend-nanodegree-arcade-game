@@ -1,21 +1,21 @@
 const playerStart_x = 200,
       playerStart_y = 400,
-      collisionArea = 60;
-let score = 0;
+      collisionArea = 50;
 
-// Generates a speed value between 50 & 150;
+// Generates a speed value between 100 & 200;
 function generateSpeed(){
-  let speed = Math.floor(Math.random() * 100) + 50;
+  let speed = Math.floor(Math.random() * 100) + 100;
   return speed;
 }
 
+// Checks to see if the player is colliding with an ememy
 function checkCollisions(){
   for (const item in allEnemies){
-    if( player.x - allEnemies[item].x < collisionArea &&
+    if (player.x - allEnemies[item].x < collisionArea &&
         player.y - allEnemies[item].y < collisionArea &&
         allEnemies[item].x - player.x < collisionArea &&
-        allEnemies[item].y - player.x < collisionArea ||
-        player.y < 1 )
+        allEnemies[item].y - player.x < collisionArea)
+
         return true;
       }
 }
@@ -42,7 +42,7 @@ class Enemy extends Character {
   super(x, y, sprite);
   this.speed = generateSpeed();
   }
-  // Update the enemy's position, required method for game
+  // Update the enemy's position
   // Parameter: dt, a time delta between ticks
   update (dt) {
     this.x += this.speed * dt;
@@ -50,29 +50,33 @@ class Enemy extends Character {
       this.x = -202;
       this.speed = generateSpeed();
     }
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // Movement is multiplied by the dt parameter will ensure
+    // the game runs at the same speed for all computers.
+    //checkCollisions();
   }
 }
+
 
 class Player extends Character {
     constructor (x, y, sprite = 'images/char-boy.png') {
       super(x, y, sprite);
     }
-    resetPlayer(){
-      this.x = playerStart_x;
-      this.y = playerStart_y;
-    }
-    update(){
-      if(checkCollisions())
-        this.resetPlayer();
 
-      if (this.y < 0){
-        alert('You Win');
-        this.resetPlayer();
+    update(){
+      if(checkCollisions()){
+        this.x = playerStart_x;
+        this.y = playerStart_y;
+      }
+
+      else if (this.y < 0){
+        setTimeout(function () {
+          this.x = playerStart_x;
+          this.y = playerStart_y;
+          alert('You Win!')
+        }, 5);
       }
     }
+
     handleInput(evt){
       switch (evt) {
         case 'left':
@@ -94,8 +98,7 @@ class Player extends Character {
           if (this.y < 400)
             this.y += 85;
           break;
-
-      update();
+        update();
       }
     }
 }
@@ -112,11 +115,7 @@ const bug1 = new Enemy (-100, 60),
       bug4 = new Enemy (-400, 60),
       bug5 = new Enemy (-500, 145),
       bug6 = new Enemy (-600, 230);
-const allEnemies = [bug1, bug2, bug3];
-
-
-
-
+const allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
