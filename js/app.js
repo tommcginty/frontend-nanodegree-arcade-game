@@ -1,6 +1,6 @@
 const playerStart_x = 200,
       playerStart_y = 400,
-      collisionArea = 50;
+      collisionArea = 80;
 
 // Generates a speed value between 100 & 200;
 function generateSpeed(){
@@ -8,17 +8,6 @@ function generateSpeed(){
   return speed;
 }
 
-// Checks to see if the player is colliding with an ememy
-function checkCollisions(){
-  for (const item in allEnemies){
-    if (player.x - allEnemies[item].x < collisionArea &&
-        player.y - allEnemies[item].y < collisionArea &&
-        allEnemies[item].x - player.x < collisionArea &&
-        allEnemies[item].y - player.x < collisionArea)
-
-        return true;
-      }
-}
 
 // parent class for player & enemies
 class Character {
@@ -36,47 +25,54 @@ class Character {
 
 // Enemies our player must avoid
 class Enemy extends Character {
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
+  // Update the enemy's position
+  // Parameter: dt, a time delta between ticks
   constructor(x, y, sprite = 'images/enemy-bug.png') {
   super(x, y, sprite);
   this.speed = generateSpeed();
   }
-  // Update the enemy's position
-  // Parameter: dt, a time delta between ticks
+
+  // Checks to see if the player is colliding with an ememy.
+  // The collisionArea provides a buffer so that the player
+  // and the enemy collide when their centers within 80 pixels
+  checkCollisions() {
+    if ((this.y == player.y) &&
+        (player.x - this.x) < collisionArea &&
+        (this.x - player.x < collisionArea)){
+            player.reset();
+        }
+    }
+
+  // Movement is multiplied by the dt parameter will ensure
+  // the game runs at the same speed for all computers.
   update (dt) {
     this.x += this.speed * dt;
     if (this.x > 505) {
       this.x = -202;
       this.speed = generateSpeed();
     }
-    // Movement is multiplied by the dt parameter will ensure
-    // the game runs at the same speed for all computers.
-    //checkCollisions();
+
+    this.checkCollisions();
   }
 }
-
 
 class Player extends Character {
     constructor (x, y, sprite = 'images/char-boy.png') {
       super(x, y, sprite);
     }
-
+    reset() {
+      this.x = playerStart_x;
+      this.y = playerStart_y;
+    }
     update(){
-      if(checkCollisions()){
-        this.x = playerStart_x;
-        this.y = playerStart_y;
-      }
-
-      else if (this.y < 0){
+      if (this.y < 0){
         setTimeout(function () {
-          this.x = playerStart_x;
-          this.y = playerStart_y;
+          player.reset();
           alert('You Win!')
-        }, 5);
+        }, 10);
       }
     }
-
+    //Player controls. Arrow keys move player one block
     handleInput(evt){
       switch (evt) {
         case 'left':
@@ -98,6 +94,7 @@ class Player extends Character {
           if (this.y < 400)
             this.y += 85;
           break;
+
         update();
       }
     }
