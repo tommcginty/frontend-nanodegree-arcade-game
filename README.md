@@ -1,7 +1,7 @@
-## Classic Arcade Game Clone
+# Classic Arcade Game Clone
 This game is a project for the [Udacity](https://udacity.com) [Front End Web Developer course](https://udacity.com/course/front-end-web-developer-nanodegree--nd001/).
 
-# Instructions
+## Instructions
 Play the game [here.](https://tommcginty.github.io/frontend-nanodegree-arcade-game/)
 Get your character to the water safely by avoiding the bugs.
 If you hit a bug, back to the beginning you go. If you make it safely to the water you win.
@@ -11,10 +11,10 @@ Use:
 * **up ↑** to move up
 * **down ↓** to move down
 
-# Resources
+## Resources
 No external resources are needed to play this game.
 
-# This is a work in progress
+### This is a work in progress
 Some things I plan on adding:
 * A score keeper and timer
 * Ability to change character avatars
