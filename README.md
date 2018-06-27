@@ -2,7 +2,7 @@
 This game is a project for the [Udacity](https://udacity.com) [Front End Web Developer course](https://udacity.com/course/front-end-web-developer-nanodegree--nd001/).
 
 # Instructions
-Play the game [here](https://tommcginty.github.io/frontend-nanodegree-arcade-game/)
+Play the game [here.](https://tommcginty.github.io/frontend-nanodegree-arcade-game/)
 Get your character to the water safely by avoiding the bugs.
 If you hit a bug, back to the beginning you go. If you make it safely to the water you win.
 Use:
