@@ -1,6 +1,27 @@
-frontend-nanodegree-arcade-game
-===============================
+## Classic Arcade Game Clone
+This game is a project for the [Udacity](https://udacity.com) [Front End Web Developer course](https://udacity.com/course/front-end-web-developer-nanodegree--nd001/).
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+# Instructions
+Play the game [here] (https://tommcginty.github.io/frontend-nanodegree-arcade-game/)
+Get your character to the water safely by avoiding the bugs.
+If you hit a bug, back to the beginning you go. If you make it safely to the water you win.
+Use:
+* **left ←** to move the left
+* **right →** to move the right
+* **up ↑** to move up
+* **down ↓** to move down
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+# Resources
+No external resources are needed to play this game.
+
+# This is a work in progress
+Some things I plan on adding:
+* A score keeper and timer
+* Ability to change character avatars
+* Start with three lives, and loose one every time you hit a bugs
+* Have random gems appear for extra points
+* Have the stone street get wider at certain levels
+* Have the bugs move faster as time goes on
+* Have the bugs go different directions
+
+Feel free to offer any suggestions.
